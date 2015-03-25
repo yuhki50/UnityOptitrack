@@ -10,14 +10,13 @@ using System.Net;
 
 namespace OptitrackManagement
 {
-	
 	// marker
 	public class Marker
 	{
 		public int ID = -1;
-		public Vector3 pos;      
+		public Vector3 pos;
 	}
-	
+
 	// Rigidbody
 	public class OptiTrackRigidBody
 	{
