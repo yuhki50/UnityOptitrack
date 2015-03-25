@@ -87,8 +87,7 @@ public class OptiTrackManager : MonoBehaviour
 	{
 		OptitrackManagement.DirectMulticastSocketClient.Close ();
 	}
-
-	// Update is called once per frame
+	
 	void Update ()
 	{
 

@@ -11,7 +11,8 @@ namespace OptitrackManagement
 {
 	public class DataStream
 	{
-		public OptiTrackRigidBody[] _rigidBody = new OptiTrackRigidBody[200];
+		private const int RigidBodyMaxLength = 200;
+		public OptiTrackRigidBody[] _rigidBody = new OptiTrackRigidBody[RigidBodyMaxLength];
 		public int _nRigidBodies = 0;
 
 		public DataStream ()
@@ -22,7 +23,7 @@ namespace OptitrackManagement
 		public bool InitializeRigidBody ()
 		{
 			_nRigidBodies = 0;
-			for (int i = 0; i < 200; i++) {
+			for (int i = 0; i < RigidBodyMaxLength; i++) {
 				_rigidBody [i] = new OptiTrackRigidBody ();
 			}
 			return true;

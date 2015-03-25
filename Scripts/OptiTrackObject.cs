@@ -9,14 +9,12 @@ public class OptiTrackObject : MonoBehaviour
 {
 	public int rigidbodyIndex;
 	public Vector3 rotationOffset;
-
-	// Use this for initialization
+	
 	void Start ()
 	{
 
 	}
-	
-	// Update is called once per frame
+
 	void Update ()
 	{
 		Vector3 pos = OptiTrackManager.Instance.getPosition (rigidbodyIndex);
