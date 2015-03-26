@@ -71,12 +71,7 @@ public class OptiTrackManager : MonoBehaviour
 			Quaternion rot = networkData.getRigidbody (rigidbodyIndex).orientation;
 
 			// change the handedness from motive
-			//rot = new Quaternion(rot.z, rot.y, rot.x, rot.w); // depending on calibration
-
-			// Invert pitch and yaw
-			Vector3 euler = rot.eulerAngles;
-			rot.eulerAngles = new Vector3 (euler.x, -euler.y, euler.z); // these may change depending on your calibration
-
+			rot = new Quaternion (rot.x, -rot.y, -rot.z, rot.w); // depending on calibration
 			return rot;
 		} else {
 			return Quaternion.identity;
