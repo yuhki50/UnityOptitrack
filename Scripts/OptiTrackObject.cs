@@ -3,14 +3,13 @@
  * Written by Matt Oskamp
  */
 using UnityEngine;
-using System.Collections;
 
 public class OptiTrackObject : MonoBehaviour
 {
-	public int rigidbodyIndex;
-	public Vector3 positionOffset;
-	public Vector3 rotationOffset;
-	
+	public int RigidbodyIndex;
+	public Vector3 PositionOffset;	
+	public Vector3 RotationOffset;
+
 	void Start ()
 	{
 
@@ -18,12 +17,12 @@ public class OptiTrackObject : MonoBehaviour
 
 	void Update ()
 	{
-		Vector3 pos = OptiTrackManager.Instance.getPosition (rigidbodyIndex);
-		pos += positionOffset;
-		this.transform.position = pos;
+		var position = OptiTrackManager.Instance.getPosition (RigidbodyIndex);
+		position += PositionOffset;
+		this.transform.position = position;
 
-		Quaternion rot = OptiTrackManager.Instance.getOrientation (rigidbodyIndex);
-		rot *= Quaternion.Euler (rotationOffset);
-		this.transform.rotation = rot;
+		var rotation = OptiTrackManager.Instance.getOrientation (RigidbodyIndex);
+		rotation *= Quaternion.Euler (RotationOffset);
+		this.transform.rotation = rotation;
 	}
 }
