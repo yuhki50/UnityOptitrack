@@ -9,8 +9,8 @@ using OptitrackManagement;
 
 public class OptiTrackManager : MonoBehaviour
 {
-	public string myName;
-	public float scale = 20.0f;
+	public string name;
+	public float scale = 1f;
 	private static OptiTrackManager instance;
 	public Vector3 origin = Vector3.zero; // set this to wherever you want the center to be in your scene
 
@@ -31,7 +31,7 @@ public class OptiTrackManager : MonoBehaviour
 
 	void Start ()
 	{
-		Debug.Log (myName + ": Initializing");
+		Debug.Log (name + ": Initializing");
 		
 		OptitrackManagement.DirectMulticastSocketClient.Start ();
 		Application.runInBackground = true;
@@ -54,9 +54,7 @@ public class OptiTrackManager : MonoBehaviour
 		if (OptitrackManagement.DirectMulticastSocketClient.IsInit ()) {
 			DataStream networkData = OptitrackManagement.DirectMulticastSocketClient.GetDataStream ();
 			Vector3 pos = origin + networkData.getRigidbody (rigidbodyIndex).position * scale;
-			pos.x = -pos.x; // not really sure if this is the best way to do it
-			//pos.y = pos.y; // these may change depending on your configuration and calibration
-			//pos.z = -pos.z;
+			pos.x = -pos.x;
 			return pos;
 		} else {
 			return Vector3.zero;
@@ -78,13 +76,13 @@ public class OptiTrackManager : MonoBehaviour
 		}
 	}
 
-	public void DeInitialize ()
-	{
-		OptitrackManagement.DirectMulticastSocketClient.Close ();
-	}
-	
 	void Update ()
 	{
 
+	}
+
+	void Destroy ()
+	{
+		OptitrackManagement.DirectMulticastSocketClient.Close ();
 	}
 }
