@@ -51,14 +51,16 @@ public class OptiTrackManager : MonoBehaviour
 
 	public Vector3 getPosition (int rigidbodyIndex)
 	{
+		Vector3 pos;
+
 		if (OptitrackManagement.DirectMulticastSocketClient.IsInit ()) {
 			DataStream networkData = OptitrackManagement.DirectMulticastSocketClient.GetDataStream ();
-			Vector3 pos = origin + networkData.getRigidbody (rigidbodyIndex).position * scale;
-			pos.x = -pos.x;
-			return pos;
+			pos = networkData.getRigidbody (rigidbodyIndex).position;
 		} else {
-			return Vector3.zero;
+			pos = Vector3.zero;
 		}
+
+		return adjustPosition (pos);
 	}
 
 	public Quaternion getOrientation (int rigidbodyIndex)
@@ -69,11 +71,25 @@ public class OptiTrackManager : MonoBehaviour
 			Quaternion rot = networkData.getRigidbody (rigidbodyIndex).orientation;
 
 			// change the handedness from motive
-			rot = new Quaternion (rot.x, -rot.y, -rot.z, rot.w); // depending on calibration
-			return rot;
+			rot = new Quaternion (rot.x, -rot.y, -rot.z, rot.w);
+			return  rot;
 		} else {
 			return Quaternion.identity;
 		}
+	}
+
+	public bool getTracked (int rigidbodyIndex)
+	{
+		return getPosition (rigidbodyIndex) != adjustPosition (Vector3.zero);
+	}
+
+	private Vector3 adjustPosition (Vector3 pos)
+	{
+		pos += origin;
+		pos *= scale;
+		pos.x = -pos.x;
+
+		return pos;
 	}
 
 	void Update ()

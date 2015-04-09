@@ -22,8 +22,7 @@ public class OptiTrackObject : MonoBehaviour
 		var position = OptiTrackManager.Instance.getPosition (RigidbodyIndex);
 		var rotation = OptiTrackManager.Instance.getOrientation (RigidbodyIndex);
 
-		var isTracked = position == OptiTrackManager.Instance.origin;  //FIXME
-		if (isTracked) {
+		if (!OptiTrackManager.Instance.getTracked (RigidbodyIndex)) {
 			return;
 		}
 
@@ -33,7 +32,7 @@ public class OptiTrackObject : MonoBehaviour
 		position += PositionOffset;
 		this.transform.position = position;
 
-		this.transform.Translate(LocalPositionOffset);
-		this.transform.Rotate(LocalRotationOffset);
+		this.transform.Translate (LocalPositionOffset);
+		this.transform.Rotate (LocalRotationOffset);
 	}
 }
