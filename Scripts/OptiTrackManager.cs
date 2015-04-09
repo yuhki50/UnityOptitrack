@@ -9,7 +9,6 @@ using OptitrackManagement;
 
 public class OptiTrackManager : MonoBehaviour
 {
-	public string name;
 	public float scale = 1f;
 	private static OptiTrackManager instance;
 	public Vector3 origin = Vector3.zero; // set this to wherever you want the center to be in your scene
@@ -31,8 +30,6 @@ public class OptiTrackManager : MonoBehaviour
 
 	void Start ()
 	{
-		Debug.Log (name + ": Initializing");
-		
 		OptitrackManagement.DirectMulticastSocketClient.Start ();
 		Application.runInBackground = true;
 	}
